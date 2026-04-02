@@ -5,12 +5,9 @@ import { PrismaService } from '../prisma/prisma.service';
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
-  async create() {
+  async create(data: { name: string; email: string }) {
     return this.prisma.user.create({
-      data: {
-        name: 'Gabriel',
-        email: 'gabriel@email.com',
-      },
+      data,
     });
   }
 

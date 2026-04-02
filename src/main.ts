@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { PrismaModule } from './prisma/prisma.module';
-import { UsersModule } from './users/users.module';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
 
-@Module({
-  imports: [PrismaModule, UsersModule],
-})
-export class AppModule {}
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  await app.listen(process.env.PORT ?? 3000);
+}
+bootstrap();

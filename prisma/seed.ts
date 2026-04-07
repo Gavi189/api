@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
+import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient({
   adapter: new PrismaPg({
@@ -9,15 +10,18 @@ const prisma = new PrismaClient({
 });
 
 async function main() {
+  const password = await bcrypt.hash('123456', 10);
+
   await prisma.user.create({
     data: {
       name: 'Admin',
       email: 'admin@email.com',
+      password,
     },
   });
 }
 
 main()
-  .then(() => console.log('Seed'))
+  .then(() => console.log('Seed executado'))
   .catch(console.error)
   .finally(() => prisma.$disconnect());

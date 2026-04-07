@@ -5,7 +5,10 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  // eslint-disable-next-line prettier/prettier
-  imports: [ConfigModule.forRoot({ isGlobal: true }), PrismaModule, UsersModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    PrismaModule,
+    UsersModule,
+  ],
 })
 export class AppModule {}

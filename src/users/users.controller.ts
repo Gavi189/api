@@ -5,13 +5,18 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Post()
-  create(@Body() body: { name: string; email: string }) {
-    return this.usersService.create(body);
-  }
-
   @Get()
   findAll() {
     return this.usersService.findAll();
+  }
+
+  @Post('signup')
+  create(@Body() body: { name: string; email: string; password: string }) {
+    return this.usersService.create(body);
+  }
+
+  @Post('signin')
+  login(@Body() body: { email: string; password: string }) {
+    return this.usersService.login(body);
   }
 }
